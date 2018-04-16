@@ -9,8 +9,7 @@
     "test": "test"
   },
   "dependencies": {
-    "@adobe/target-node-client": "^0.10.2",
-    "adobe-analytics-di": "^1.0.4",
+   "adobe-analytics-di": "^1.0.4",
     "chai": "^4.1.2",
     "jwt-simple": "^0.5.1",
     "properties-reader": "0.0.16",
