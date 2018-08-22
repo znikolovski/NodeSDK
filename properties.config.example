@@ -1,0 +1,19 @@
+[adobe]
+aem.url = AEM Publish URL
+aem.author.url = AEM Author URL
+campaign.url = Adobe Campaign Standard URL
+campaign.host = ACS Hostname
+aam.baseUrl = Audience Manager base url
+client = Target Client
+tenant = Adobe Marketing Cloud Tenant
+api.key = Adobe I/O Integration API Key
+client.secret = Adobe I/O Integration Client Secfret
+technicalAcc = Adobe I/O Integration Technical Account
+organisationId = Adobe Marketing Cloud Organisation ID
+suffix = @AdobeOrg
+timeout = 10000
+analytics.reportSuite = Analytics Report Suite
+target.service = empty
+dataSourceId = The AAM Data Source ID
+dataSourceIntegrationCode = The AAM Data Source Integration Code
+private.key = The Private Sertificate used to create the Adobe I/O integartion as a comma-separated list
