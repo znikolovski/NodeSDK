@@ -99,7 +99,7 @@ function MarketingCloudClient() {
     };
 };
 
-MarketingCloudClient.create = properties, services => {
+MarketingCloudClient.prototype.create = properties, services => {
     if (!properties) {
         throwError('A properties reference must be provided');
     }
