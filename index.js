@@ -64,19 +64,19 @@ function returnProfileService() {
 
 function MarketingCloudClient() {
     this.getAA = () => {
-        return returnAA();
+        return returnAnalyticsService();
     };
 
     this.getAAM = () => {
-        return returnAA();
+        return returnAudienceManagerService();
     };
 
     this.getTarget = () => {
-        return returnAA();
+        return returnTargetService();
     };
 
     this.getJWT = () => {
-        return returnJWT();
+        return returnJWTService();
     };
 
     this.getAccessToken = () => {
