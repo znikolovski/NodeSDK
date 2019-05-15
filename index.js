@@ -3,9 +3,6 @@ A Node.JS wrapper for the Adobe Marketing Cloud client APIs for
 AAM, AA and Target, Campaign and Profile Services 
 ---------------------------------------------------------------------------------*/
 
-var PropertiesReader = require('properties-reader');
-var properties = PropertiesReader('properties.config');
-
 var JWT = require('./lib/jwt');
 var AccessTokenHelper = require('./lib/accesstoken');
 var AnalyticsHelper = require('./lib/analytics');
@@ -16,7 +13,7 @@ var AudienceManagerHelper = require('./lib/audiencemanager');
 
 // The services configured with your Adobe.IO integration. Remove the ones that you don't need before proceeding
 var services = {
-    "https://ims-na1.adobelogin.com/s/ent_reactor_admin_sdk": true,
+   "https://ims-na1.adobelogin.com/s/ent_reactor_admin_sdk": true,
    "https://ims-na1.adobelogin.com/s/ent_analytics_bulk_ingest_sdk": true,
    "https://ims-na1.adobelogin.com/s/ent_sensei_image_sdk": true,
    "https://ims-na1.adobelogin.com/s/ent_user_sdk": true,
@@ -26,68 +23,40 @@ var services = {
    "https://ims-na1.adobelogin.com/s/event_receiver_api": true,
 };
 
-var AA = null;
-var AAM = null;
-var Target = null;
-var JWT = null;
-var AccessToken = null;
-var Campaign = null;
-var Profile = null;
+function MarketingCloudClient(properties) {
+    this.AA = new AnalyticsHelper(properties);
+    this.AAM = new AudienceManagerHelper(properties);
+    this.Target = new TargetHelper(properties);
+    this.Campaign = new CampaignHelper(properties);
+    this.Profile = new ProfileHelper();
+    this.JWT = new JTW(properties, services);
+    this.AccessToken = new AccessTokenHelper(properties);
 
-function returnAnalyticsService() {
-    return this.AA;
-};
-
-function returnAudienceManagerService() {
-    return this.AAM;
-};
-
-function returnTargetService() {
-    return this.Target;
-};
-
-function returnJWTService() {
-    return this.JWT;
-};
-
-function returnAccessTokenService() {
-    return this.AccessToken;
-};
-
-function returnCampaignService() {
-    return this.Campaign;
-};
-
-function returnProfileService() {
-    return this.Profile;
-};
-
-function MarketingCloudClient() {
     this.getAA = () => {
-        return returnAnalyticsService();
+        return this.AA;
     };
 
     this.getAAM = () => {
-        return returnAudienceManagerService();
+        return this.AAM;
     };
 
     this.getTarget = () => {
-        return returnTargetService();
+        return this.Target;
     };
 
     this.getJWT = () => {
-        return returnJWTService();
+        return this.JWT;
     };
 
     this.getAccessToken = () => {
-        return returnAccessTokenService();
+        return this.AccessToken;
     };
 
     this.getCampaign = () => {
         if(!JWT && !AccessToken) {
             throwError('The Campaign Service requires a valid Adobe I/O configuration')
         }
-        return returnCampaignService();
+        return this.Campaign;
     };
 
     this.getProfile = () => {
@@ -95,11 +64,11 @@ function MarketingCloudClient() {
             throwError('The Profile Service requires a valid Adobe I/O configuration')
         }
 
-        return returnProfileService();
+        return this.Profile;
     };
 };
 
-MarketingCloudClient.prototype.create = properties, services => {
+MarketingCloudClient.prototype.create = (properties, services) => {
     if (!properties) {
         throwError('A properties reference must be provided');
     }
@@ -109,13 +78,7 @@ MarketingCloudClient.prototype.create = properties, services => {
         this.AccessToken = new AccessTokenHelper(properties);
     }
 
-    this.Campaign = new CampaignHelper(properties);
-    this.Profile = new ProfileHelper();
-    this.AA = new AnalyticsHelper(properties);
-    this.AAM = new AAMHelper(properties);
-    this.Target = new TargetHelper(properties);
-
-    return new MarketingCloudClient();
+    return new MarketingCloudClient(properties);
 }
 
 module.exports = MarketingCloudClient;
