@@ -6,6 +6,28 @@ A Node.JS wrapper for the Adobe Marketing Cloud client APIs for AAM, AA and Targ
 2. Run 'npm install'
 3. Create a properties file (copy to provided properties.config.example file and modify as required)
 
+## Using the NodeSDK
+```
+const adobeClient = new MarketingCloudClient();
+const analyticsService = adobeClient.getAA();
+const aamService = adobeClient.getAAM();
+const targetService = adobeClient.getTarget();
+
+let vid = await aamService.getVisitorId();
+const eVars = {
+    eVar3: "value",
+};
+const data = {
+    marketingCloudVisitorID: vid.d_mid,
+    visitorID: vid.d_mid,
+    referrer: 'referrer',
+    pageName: 'Page Name',
+    channel: 'Channel',
+    eVar: eVars,
+};
+analyticsService.track(data);
+```
+
 ## Adobe Helpers
 These helper objects wrap each of our products/services. The intent is that through the methods that the helpers expose any server-side application (e.g. ChatBot, Alexa Skill, Google Action) can achieve parity with a web page.
 
