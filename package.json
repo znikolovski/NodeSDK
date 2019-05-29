@@ -1,6 +1,6 @@
 {
   "name": "@znikolovski/nodesdk",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Adobe Marketing Cloud Node SDK wrapper for AAM, AA and Target",
   "main": "index.js",
   "directories": {
