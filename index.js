@@ -78,7 +78,13 @@ MarketingCloudClient.prototype.create = (properties, services) => {
         this.AccessToken = new AccessTokenHelper(properties);
     }
 
-    return new MarketingCloudClient(properties);
+    this.Campaign = new CampaignHelper(properties);
+    this.Profile = new ProfileHelper();
+    this.AA = new AnalyticsHelper(properties);
+    this.AAM = new AudienceManagerHelper(properties);
+    this.Target = new TargetHelper(properties);
+
+    return new MarketingCloudClient();
 }
 
 module.exports = MarketingCloudClient;
