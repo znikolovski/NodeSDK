@@ -29,7 +29,7 @@ function MarketingCloudClient(properties) {
     this.Target = new TargetHelper(properties);
     this.Campaign = new CampaignHelper(properties);
     this.Profile = new ProfileHelper();
-    this.JWT = new JTW(properties, services);
+    this.JWT = new JWT(properties, services);
     this.AccessToken = new AccessTokenHelper(properties);
 
     this.getAA = () => {
@@ -84,7 +84,7 @@ MarketingCloudClient.prototype.create = (properties, services) => {
     this.AAM = new AudienceManagerHelper(properties);
     this.Target = new TargetHelper(properties);
 
-    return new MarketingCloudClient();
+    return new MarketingCloudClient(properties);
 }
 
 module.exports = MarketingCloudClient;
